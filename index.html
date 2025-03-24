@@ -75,6 +75,18 @@
             for (let i = 0; i < 5; i++) {
                 playRound(getHumanChoice(), getComputerChoice());
             }
+
+            if (humanScore>computerScore) {
+                alert("You Win!");
+            }
+
+            else if (computerScore>humanScore) {
+                alert("You Loose!");
+            }
+
+            else{
+                alert("drew this game");
+            }
             
         }
 
@@ -82,6 +94,7 @@
         let computerScore = 0;
 
        playGame();
+
 
        console.log(`${humanScore}, ${computerScore}`)
 

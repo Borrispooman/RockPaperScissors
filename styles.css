@@ -1,0 +1,55 @@
+.heading{
+    padding: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: grey;
+    font-size: 40px;
+}
+
+.subheading {
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: grey;
+    font-size: 20px;
+
+}
+
+.scoreContainer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap:35px;
+    background-color: aliceblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size:20px;
+
+}
+
+.choiceContainer{
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    padding: 10px;
+}
+
+button{
+    font-size: 100px;
+}
+
+.roundtext{
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: grey;
+    font-size: 20px;
+}
+
+.winner{
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: grey;
+    font-size: 20px;
+
+}

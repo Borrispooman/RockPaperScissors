@@ -1,61 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset = "utf-8">
+        <meta charset="utf-8">
         <title>RockPaperScissors</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <div class="heading">Rock Paper Scissors</div>
-        <div class="subheading">Click an option to start game</div>
+        <div class="subheading">Click an option to start game - first to five wins.</div>
 
         <div class="scoreContainer">
-
             <div class="yourScore">your score: 0</div>
             <div class="compScore">computer score: 0</div>
-
         </div>
-
 
         <div class="choiceContainer">
-            <button class="rock">Rock emoji</button>
-            <button class="paper">Paper emoji</button>
-            <button class="scissors">Scissor emoji</button>
+            <button class="rock">&#9994</button>
+            <button class="paper">&#9995</button>
+            <button class="scissors">&#9996</button>
         </div>
 
-        <div class="roundtext">Div for how use did in the round</div>
-
-
-
-
+        <div class="roundtext"></div>
+        <div class="winner"></div>
 
     </body>
 
-
-
-
-
-
-
-
-
-
-
-
     <script>
+        // Declare and initialize scores at the top of the script
+        let humanScore = 0;
+        let computerScore = 0;
+
         function getComputerChoice() {
-            let choiceAsInt = Math.random()
+            let choiceAsInt = Math.random();
 
             if (choiceAsInt >= 0 && choiceAsInt <= 0.3333333) {
-                let computerChoice = "rock"
-                return (computerChoice);
+                return "rock";
             } else if (choiceAsInt >= 0.34 && choiceAsInt <= 0.6666666) {
-                let computerChoice = "paper"
-                return (computerChoice);
+                return "paper";
             } else {
-                let computerChoice = "scissors"
-                return (computerChoice);
+                return "scissors";
             }
-
         }
 
         const choice = document.querySelector(".choiceContainer");
@@ -64,94 +48,107 @@
             if (event.target.matches(".rock, .paper, .scissors")) {
                 let humanChoice = event.target.className;
                 playRound(humanChoice, getComputerChoice());
-
-                console.log(humanChoice);
             }
-
-        })
-
+        });
 
         function playRound(Choice, computerChoice) {
+            let choiceCaseSens = Choice.toLowerCase();
 
-            let choiceCaseSens = Choice.toLowerCase()
-
-            if (choiceCaseSens == ".rock"){
-                if (computerChoice = "scissors"){
-                    displayWin();
-                humanScore+=1;} 
-                else if (computerChoice == "paper"){
-                    displayLoss();
-                    computerScore+=1;
-                } else {
-                    displayDraw();
-                }
-            }
-
-
-            else if (choiceCaseSens == ".paper"){
-                if (computerChoice == "rock"){
-                    displayWin();
-                    humanScore+=1;
-                }
-                else if (computerChoice == "scissors") {
-                    displayLoss();
-                    computerScore+=1;
-                }
-                else {
-                    displayDraw();
-                }
-            }
-
-            else{
-                if (computerChoice == "paper") {
+            if (choiceCaseSens === "rock") {
+                if (computerChoice === "scissors") {
                     displayWin();
                     humanScore += 1;
-                } else if (computerChoice=="scissors"){
+                } else if (computerChoice === "paper") {
                     displayLoss();
                     computerScore += 1;
                 } else {
                     displayDraw();
-                    }
+                }
+            } else if (choiceCaseSens === "paper") {
+                if (computerChoice === "rock") {
+                    displayWin();
+                    humanScore += 1;
+                } else if (computerChoice === "scissors") {
+                    displayLoss();
+                    computerScore += 1;
+                } else {
+                    displayDraw();
+                }
+            } else {
+                if (computerChoice === "paper") {
+                    displayWin();
+                    humanScore += 1;
+                } else if (computerChoice === "scissors") {
+                    displayLoss();
+                    computerScore += 1;
+                } else {
+                    displayDraw();
+                }
             }
 
+            // After the round, check for a winner and update scores
+            updateScores();
+            displayWinner();
+        }
 
+        function displayWin() {
+            const roundProg = document.querySelector(".roundtext");
+            roundProg.textContent = "You won the round!";
+        }
 
+        function displayLoss() {
+            const roundProg = document.querySelector(".roundtext");
+            roundProg.textContent = "You lost the round!";
+        }
 
-            const userScore = document.querySelector(".yourScore")
+        function displayDraw() {
+            const roundProg = document.querySelector(".roundtext");
+            roundProg.textContent = "You drew the round!";
+        }
 
-            const compScore = document.querySelector(".compScore")
-
-            userScore.textContent = `Your score: ${humanScore}`
-
-            compScore.textContent = `Computer score: ${computerScore}`
-            
+        // Check if someone has won the game
+        function checkScore() {
+            if (humanScore === 5) {
+                return "human"; // Human wins
             }
 
-        function playGame() {
-            for (let i = 0; i < 5; i++) {
-                playRound(humanChoice, getComputerChoice());
+            if (computerScore === 5) {
+                return "computer"; // Computer wins
+            } else {
+                return "notyet"; // Game not yet won
             }
+        }
 
-            if (humanScore>computerScore) {
-                alert("You Win!");
+        // Reset the scores after someone wins
+        function resetScores() {
+            humanScore = 0;
+            computerScore = 0;
+            updateScores();
+        }
+
+        // Display the winner message
+        function displayWinner() {
+            const winnerDisplay = document.querySelector(".winner");
+            let winner = checkScore();
+
+            if (winner === "human") {
+                winnerDisplay.textContent = "You won the game!";
+                resetScores();
+            } else if (winner === "computer") {
+                winnerDisplay.textContent = "You lost the game, sorry!";
+                resetScores();
+            } else {
+                winnerDisplay.textContent = ""; // Clear the winner message if no winner yet
             }
+        }
 
-            else if (computerScore>humanScore) {
-                alert("You Loose!");
-            }
+        // Update the score display after each round
+        function updateScores() {
+            const userScore = document.querySelector(".yourScore");
+            const compScore = document.querySelector(".compScore");
 
-            else{
-                alert("drew this game");
-            }
-            
-        } 
-
-        let humanScore = 0;
-        let computerScore = 0;
-
-
-       console.log(`${humanScore}, ${computerScore}`)
-
-
+            userScore.textContent = `Your score: ${humanScore}`;
+            compScore.textContent = `Computer score: ${computerScore}`;
+        }
     </script>
 </html>
